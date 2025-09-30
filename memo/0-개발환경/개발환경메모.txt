@@ -1,0 +1,128 @@
+파이토치 사용 환경 설정. 
+
+1
+코랩 , 검색어, 코랩 치고, 구글 계정으로 로그인하면, 
+바로 사용가능. 
+
+2
+아나콘다 , 설치
+
+3
+파이참 IDE pro. 이미 사용중. 
+
+4 
+로컬, gpu 연산을 위한 그래픽 카드가 있다면, cuda 설정. 
+==================================================
+파이토치 설치 확인 연동 샘플 코드. 
+
+1.
+import torch
+print(torch.__version__)  # 설치된 PyTorch 버전 출력
+print(torch.cuda.is_available())  # CUDA 사용 가능 여부 확인
+
+if torch.cuda.is_available():
+    print(f"GPU 사용 가능: {torch.cuda.get_device_name(0)}")
+else:
+    print("GPU를 사용할 수 없습니다. CPU를 사용합니다.")
+
+x = torch.rand(3, 3)
+y = torch.rand(3, 3)
+z = x + y
+print("x:", x)
+print("y:", y)
+print("z:", z)
+
+
+2
+아나콘다 , 설치
+
+검색어: 아나콘다 , 다운로드 , 각 운영체제 맞게, 
+
+설치 기본 설정으로 진행 후, 
+
+아나콘다 명령어 실행하기. 
+
+가상화 환경 만드는 샘플 코드, 
+
+conda create -n Pytorch python=3.10
+
+가상환경 목록 조회. 
+conda env list  
+
+실행 명령어 
+conda activate Pytorch
+
+예시 화면
+(base) C:\Users\it>conda env list
+
+# conda environments:
+#
+base                 * C:\Users\it\anaconda3
+Pytorch                C:\Users\it\anaconda3\envs\Pytorch
+가상환경이름                 C:\Users\it\anaconda3\envs\가상환경이름
+
+
+(base) C:\Users\it>conda activate Pytorch
+
+(Pytorch) C:\Users\it>
+
+2-2
+파이참 프로페셜널 
+
+새 프로젝트 -> 순수 파이선 선택 -> 가상화 콘다 기본 설정 탭 선택 
+(미니 콘다 설치)
+-> 터미널에서 -> 새 터미널 추가(Command Prompt) 
+->  확인. 
+(base) D:\0-django-workspace\PythonProject>conda activate Pytorch
+
+(Pytorch) D:\0-django-workspace\PythonProject>
+
+
+2-3 
+검색어 : 파이토치 설치, 
+파이토치 공식 문서에 가서, 콘다 버전으로, cpu 선택 해서, 설치 작업. 
+
+pip3 install torch torchvision torchaudio
+
+
+2-3-2 , 
+파이참 프로에서, 콘다 가상환경 설정. 
+파일 -> 설정, -> 프로젝트 ~ -> 파이썬 인터 프리터 
+-> 콘다 가상화 이름  Pytorch 보이면 정상이고, 선택.
+-> 만약, 안보인다. -> 인터프리터 추가 -> 로컬 -> 기존 항목 
+-> 콘다 부분에 , 해당 Pytorch 이름이 있다. 선택. 
+
+
+
+2-4.
+새 쥬피터 노트북 파일 생성해서. 
+import torch
+print(torch.__version__)  # 설치된 PyTorch 버전 출력
+print(torch.cuda.is_available())  # CUDA 사용 가능 여부 확인
+
+if torch.cuda.is_available():
+    print(f"GPU 사용 가능: {torch.cuda.get_device_name(0)}")
+else:
+    print("GPU를 사용할 수 없습니다. CPU를 사용합니다.")
+
+x = torch.rand(3, 3)
+y = torch.rand(3, 3)
+z = x + y
+print("x:", x)
+print("y:", y)
+print("z:", z)
+
+확인. 
+결과 출력 코드 
+2.6.0+cpu
+False
+GPU를 사용할 수 없습니다. CPU를 사용합니다.
+x: tensor([[0.9237, 0.9286, 0.4419],
+        [0.6556, 0.7602, 0.0000],
+        [0.1257, 0.6067, 0.4556]])
+y: tensor([[0.4004, 0.0610, 0.0211],
+        [0.0301, 0.7693, 0.0815],
+        [0.8225, 0.8339, 0.9090]])
+z: tensor([[1.3241, 0.9896, 0.4630],
+        [0.6857, 1.5295, 0.0815],
+        [0.9482, 1.4406, 1.3646]])

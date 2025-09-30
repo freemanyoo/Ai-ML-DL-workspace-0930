@@ -708,7 +708,10 @@ X = torch.tensor([[0, 0],
                   [0, 1],
                   [1, 0],
                   [1, 1]], dtype=torch.float32)  # 입력값
-Y = torch.tensor([[0], [1], [1], [0]], dtype=torch.float32)  # 정답값
+Y = torch.tensor([  [0],
+                    [1],
+                    [1],
+                    [0]], dtype=torch.float32)  # 정답값
 
 데이터	내용	Shape
 X	4개의 샘플, 각 샘플은 2개의 입력 특성(0 또는 1)	(4, 2)

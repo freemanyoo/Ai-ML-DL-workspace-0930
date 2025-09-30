@@ -7,6 +7,30 @@
 2
 아나콘다 , 설치
 
+2-2 아나콘다 명령어창
+하단 돋보기 -> anaconda prompt (우클릭 , 관리자 실행)
+
+2-3 가상환경 : Pytorch , 이름으로 만들기, (버전 3.10)
+conda create -n Pytorch python=3.10
+
+2-4 콘다 리스트 , 목록 조회 
+conda env list 
+
+2-5 콘다 실행, 활성화 하기. 
+conda activate Pytorch
+
+2-6, gpu , -> nvidia 기준으로, cuda 관련 라이브러리 설치. cuda 12.x, 각자 
+그래픽 카드에 맞게 설치.(현재, 생략)
+
+2-7 파이토치 설치. 공식 사이트 접속
+https://pytorch.org/get-started/locally/
+
+2-8 , 각자 환경에 맞게 작업 후, 설치 진행, 현재, cpu 버전으로, 
+옵션 선택 
+1 Stable 2.8.0 -> 2 Windows -> 3 Pip -> 4 CPU 
+선택 후 결과 설치 명령어
+pip3 install torch torchvision
+
 3
 파이참 IDE pro. 이미 사용중. 
 

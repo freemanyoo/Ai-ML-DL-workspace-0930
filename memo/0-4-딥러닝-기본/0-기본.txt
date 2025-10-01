@@ -453,7 +453,7 @@ for epoch in range(1001):
 	y_hat = torch.matmul(x, w) + b
 
 	# 예측값과 실제값을 이용하여 손실 함수를 계산한다.
-	#여기서 사용된 함수는 Mean Square ETrorMSE이다.
+	#여기서 사용된 함수는 Mean Square ErorMSE이다.
 	loss = torch.mean((y_hat-y)**2)
 	# 역전파의 기준을 손실 함수로 정한다.
 	loss.backward()

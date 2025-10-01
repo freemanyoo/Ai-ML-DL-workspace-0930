@@ -492,6 +492,9 @@ plt.legend(l'ground truth', prediction'])
 plt.title("Prediction")
 plt.show()
 
+============================================
+
+conda install torchvision -c pytorch
 
 43데이터 불러오기
 메모리와 같은 하드웨어 성능의 한계 등의 이유로

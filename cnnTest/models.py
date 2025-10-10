@@ -1,10 +1,9 @@
-from django.db import models
-
 # Create your models here.
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from django.db import models
+import torchvision.models as models
+
 
 # CNN 모델 정의 (Hammer, Nipper 분류)
 class CustomCNN(nn.Module):
@@ -31,6 +30,20 @@ def load_model():
     from config import settings
     model_path = os.path.join(settings.BASE_DIR, "custom_cnn_251002.pth")
     model = CustomCNN(num_classes=2)
+    model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
+    model.eval()
+    return model
+
+# 교체1
+# ResNet50 모델 로드 함수
+# import torchvision.models as models, 수동 임포트
+def load_resnet50():
+    import os
+    from config import settings
+    model_path = os.path.join(settings.BASE_DIR, "resnet50-251010_model.pth")
+    model = models.resnet50(pretrained=False)
+    num_ftrs = model.fc.in_features
+    model.fc = nn.Linear(num_ftrs, 2)  # Hammer / Nipper 분류 (2개 클래스)
     model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
     model.eval()
     return model

@@ -1,0 +1,105 @@
+ResNet 개념을 쉬운 설명과 예시로 이해하기
+
+1. 기존 신경망과 ResNet의 차이
+💡 기존 신경망의 문제점
+일반적인 신경망은 층을 깊게 쌓을수록 성능이 좋아질 것 같지만,
+오히려 학습이 더 어려워지는 문제가 발생합니다.
+이유는 기울기 소실(Vanishing Gradient) 문제 때문입니다.
+
+📌 **기울기 소실 문제란?
+신경망이 너무 깊어지면, 역전파(Backpropagation) 과정에서
+기울기(Gradient)가 점점 작아져서
+앞쪽 층들이 제대로 학습되지 않는 현상입니다.
+이 때문에 층이 많아질수록 학습이 잘 안 되고, 성능이 나빠질 수 있음
+
+2. ResNet은 어떻게 해결할까?
+💡 해결책: "잔차 연결(Residual Connection)"을 추가하자!
+ResNet은 신경망을 거쳐 변환되는 값뿐만 아니라,
+**입력 값을 그대로 다음 층으로 더하는
+"스킵 연결(Skip Connection)"**을 추가합니다.
+
+이렇게 하면 정보가 네트워크를 타고 흐르면서도
+원래 값을 유지할 수 있어 기울기 소실 문제를 해결할 수 있습니다.
+
+📌 잔차 블록(Residual Block)의 개념
+일반적인 신경망:
+
+𝑌=𝐹(𝑋)
+Y=F(X)
+입력 X를 네트워크가 변환한 결과가 Y가 됨
+
+ResNet의 잔차 블록:
+
+
+Y=F(X)+X
+네트워크가 변환한 값
+
+F(X)에다가 입력값 X를 그대로 더해줌!
+(이렇게 하면 정보가 원래 형태를 유지하면서도 변형된 정보를 학습 가능)
+
+3. 쉬운 비유: 계단 오르기
+💡 기존 신경망과 ResNet을 비교하는 쉬운 예시
+
+🏃 기존 신경망 → 높은 계단 오르기
+
+보통의 CNN 네트워크는 계단을 한 칸씩 올라가면서 학습합니다.
+계단이 높아질수록 올라가기 어려워지고, 결국 학습이 멈출 수 있습니다.
+
+🏃 ResNet → 에스컬레이터 + 계단
+
+ResNet에서는 **잔차 연결(Residual Connection)**이
+마치 에스컬레이터 역할을 합니다.
+
+즉, "나는 계단을 오르면서도, 에스컬레이터에 기대어 가고 있어!"
+덕분에 층이 깊어도 정보가 흐르기 쉬워지고, 학습이 잘 됩니다.
+
+4. ResNet의 실제 예시 (코드)
+이제 간단한 코드 예시로 이해해 봅시다.
+아래는 ResNet 블록을 간단히 구현한 코드입니다.
+
+
+
+
+import torch
+import torch.nn as nn
+
+# 간단한 ResNet 블록 정의
+class ResidualBlock(nn.Module):
+    def __init__(self, in_channels):
+        super(ResidualBlock, self).__init__()
+        self.conv1 = nn.Conv2d(in_channels, in_channels, kernel_size=3, padding=1)
+        self.relu = nn.ReLU()
+        self.conv2 = nn.Conv2d(in_channels, in_channels, kernel_size=3, padding=1)
+
+    def forward(self, x):
+        residual = x  # 원래 입력값을 저장
+        out = self.conv1(x)
+        out = self.relu(out)
+        out = self.conv2(out)
+        out += residual  # 스킵 연결 (잔차 연결)
+        out = self.relu(out)
+        return out
+
+# 입력 데이터 샘플
+x = torch.randn(1, 3, 64, 64)  # (배치, 채널, 높이, 너비)
+
+# ResNet 블록 테스트
+block = ResidualBlock(3)
+output = block(x)
+
+print("입력 크기:", x.shape)
+print("출력 크기:", output.shape)
+📌 결과 해석
+
+입력 크기: (1, 3, 64, 64)
+출력 크기: (1, 3, 64, 64)
+즉, 입력과 출력의 크기가 동일하지만, 정보가 학습된 상태가 됩니다.
+잔차 연결이 없었다면 정보가 변형되었을 수 있지만, 입력 데이터를 유지하면서 학습이 가능합니다.
+
+5. 한눈에 정리
+개념	설명
+기존 CNN 문제	깊은 층으로 갈수록 기울기 소실 문제 발생
+ResNet 해결법	입력 데이터를 그대로 전달하는 "잔차 연결" 추가
+비유	계단만 있는 신경망 vs. 에스컬레이터가 있는 ResNet
+장점	더 깊은 네트워크를 안정적으로 학습 가능
+응용 분야	이미지 분류, 객체 검출, 의료 영상 분석 등

@@ -107,6 +107,7 @@ Pytorch                C:\Users\it\anaconda3\envs\Pytorch
 파이토치 공식 문서에 가서, 콘다 버전으로, cpu 선택 해서, 설치 작업. 
 
 pip3 install torch torchvision torchaudio
+conda install torch torchvision torchaudio
 
 
 2-3-2 , 

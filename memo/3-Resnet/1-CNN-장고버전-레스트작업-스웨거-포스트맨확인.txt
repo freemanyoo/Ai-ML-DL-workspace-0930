@@ -260,6 +260,9 @@ def load_model():
 서버 시작시, 모두 허용으로 시작.
 python manage.py runserver 0.0.0.0:8000
 
+웹 브라우저
+http://localhost:8000/
+
 장고 기본 보안 설정. csrf 토큰 활성화 -> 비활성화
 
 cnnTest/views.py

@@ -5,7 +5,8 @@ from PIL import Image
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework import serializers
+from drf_yasg.utils import swagger_auto_schema
+from rest_framework import serializers, viewsets , status
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.permissions import AllowAny
 from rest_framework.routers import DefaultRouter
@@ -13,6 +14,9 @@ from rest_framework.views import APIView
 
 from config.forms import ImageUploadForm
 from .models import load_model
+from drf_yasg import openapi
+
+from rest_framework.response import Response
 
 # CNN 모델 로드
 model = load_model()
@@ -54,17 +58,39 @@ def classify_image(request):
     return JsonResponse({"error": "Invalid request"}, status=400)
 
 # 레스트풀 형식의 컨트롤러 ,
-class ImageClassificationAPIView(APIView):
+
+#임시로 , 시리얼라이저 클래스 등록하기.
+# Serializer 정의
+class ImageUploadSerializer(serializers.Serializer):
+    image = serializers.ImageField()
+
+# ViewSet 정의
+class ImageClassificationViewSet(viewsets.ViewSet):
     parser_classes = (MultiPartParser, FormParser)
     permission_classes = [AllowAny]
+	#스웨거에서, 파일 업로드 안보일 때 설정 코드.
+    parser_classes = (MultiPartParser, FormParser)
 
-    def post(self, request, *args, **kwargs):
-        if 'image' not in request.FILES:
-            from rest_framework.response import Response
-            from rest_framework import status
-            return Response({'error': 'No image provided'}, status=status.HTTP_400_BAD_REQUEST)
+    # from drf_yasg import openapi , 수동 임포트 하기.
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter(
+                "image",
+                openapi.IN_FORM,
+                description="업로드할 이미지 파일",
+                type=openapi.TYPE_FILE
+            )
+        ]
+    )
 
-        image_file = request.FILES['image']
+    # from rest_framework.response import Response, 수동 임포트 , Response 못찾을 경우
+    # from rest_framework import serializers, viewsets , status , 수동 임포트 , status 못찾을 경우
+    def create(self, request, *args, **kwargs):
+        serializer = ImageUploadSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        image_file = serializer.validated_data['image']
         if not isinstance(image_file, InMemoryUploadedFile):
             return Response({'error': 'Invalid file type'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -85,17 +111,3 @@ class ImageClassificationAPIView(APIView):
             return Response(response_data, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-# Serializer 정의
-class ImageUploadSerializer(serializers.Serializer):
-    image = serializers.ImageField()
-
-# 라우터 등록
-router = DefaultRouter()
-
-
-class ImageClassificationViewSet:
-    pass
-
-
-router.register(r'classify-image', ImageClassificationViewSet, basename='classify-image')

@@ -402,6 +402,7 @@ cnnTest/views.py
 class ImageUploadSerializer(serializers.Serializer):
     image = serializers.ImageField()
 
+# urls.py 에 등록하기.
 # 라우터 등록
 router = DefaultRouter()
 router.register(r'classify-image', ImageClassificationViewSet, basename='classify-image')
@@ -416,6 +417,7 @@ urlpatterns = [
 =========================================================
 # 임포트 참고
 # Create your views here.
+
 import torch
 import torchvision.transforms as transforms
 from PIL import Image

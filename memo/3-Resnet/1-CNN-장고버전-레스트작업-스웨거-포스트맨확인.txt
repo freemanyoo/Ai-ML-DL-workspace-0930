@@ -96,8 +96,8 @@ class CustomCNN(nn.Module):
 # 모델 로드 함수
 def load_model():
     import os
-    from config import settings
-    model_path = os.path.join(settings.BASE_DIR, "custom_cnn.pth")
+    from config import settings # config 설정폴더로 변경
+    model_path = os.path.join(settings.BASE_DIR, "custom_cnn.pth") # custom_cnn.pth 파일 이름으로 변경
     model = CustomCNN(num_classes=2)
     model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
     model.eval()

@@ -1,0 +1,14 @@
+#리액트_스프링_연동
+1 자료1
+https://gamma.app/docs/API-JWT-eh1or5czp6xgh2m?mode=doc
+2 자료2
+스프링 부트 서버 백엔드 깃 주소
+https://github.com/lsy3709/React-Spring-Con-Work-boot-Backend.git
+3 자료3
+리액트 프론트 엔드 깃 주소
+https://github.com/lsy3709/React-Spring-Con-Work-boot-Frontend-.git
+
+4 모델 탑재한, 레스트 (플라스크서버)
+현재 프로젝트 폴더 -> 3-Resnet -> 플라스크 서버 샘플 작업.txt
+파일 참고,
+

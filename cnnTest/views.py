@@ -13,13 +13,17 @@ from rest_framework.routers import DefaultRouter
 from rest_framework.views import APIView
 
 from config.forms import ImageUploadForm
-from .models import load_model
+from .models import load_model, load_resnet50
 from drf_yasg import openapi
 
 from rest_framework.response import Response
 
 # CNN 모델 로드
 model = load_model()
+
+# 교체2
+#ResNet50 모델 로드
+# model_resnet50 = load_resnet50()
 
 # 클래스 이름
 class_names = ["Hammer", "Nipper"]
@@ -44,7 +48,9 @@ def classify_image(request):
 
             # 모델 예측
             with torch.no_grad():
+                # 교체3
                 output = model(image)
+                # output = model_resnet50(image)
                 probabilities = torch.nn.functional.softmax(output[0], dim=0)
                 predicted_idx = torch.argmax(probabilities).item()
                 confidence = probabilities[predicted_idx].item()
@@ -99,7 +105,9 @@ class ImageClassificationViewSet(viewsets.ViewSet):
             image = transform_image(image)
 
             with torch.no_grad():
+                # 교체4
                 output = model(image)
+                # output = model_resnet50(image)
                 probabilities = torch.nn.functional.softmax(output[0], dim=0)
                 predicted_idx = torch.argmax(probabilities).item()
                 confidence = probabilities[predicted_idx].item()

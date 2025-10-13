@@ -12,3 +12,23 @@ https://github.com/lsy3709/React-Spring-Con-Work-boot-Frontend-.git
 현재 프로젝트 폴더 -> 3-Resnet -> 플라스크 서버 샘플 작업.txt
 파일 참고,
 
+5 스프링 부트 연동된 , 마리아 디비, 몽고디비 머신 시작
+도커 데스크탑에서,
+마리아 디비 시작.
+
+몽고디비 시작 명령어
+mongod --dbpath D:\MongoDB\data
+
+6 스프링 부트
+몽고디비 설정,
+application.properties 파일에서,
+
+spring.data.mongodb.uri=mongodb://localhost:27017/test
+
+7
+시작
+1) 스프링 부트 , 시작 버튼 클릭
+2) 리액트 서버 시작,
+터미널에서, 해당 폴더로 이동 후,
+cd .\react-spring-con-test\
+-> yarn dev , 실행하기.

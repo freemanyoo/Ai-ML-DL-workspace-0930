@@ -11,6 +11,8 @@ https://github.com/lsy3709/React-Spring-Con-Work-boot-Frontend-.git
 4 모델 탑재한, 레스트 (플라스크서버)
 현재 프로젝트 폴더 -> 3-Resnet -> 플라스크 서버 샘플 작업.txt
 파일 참고,
+flask 서버 실행 명령어
+python app.py
 
 5 스프링 부트 연동된 , 마리아 디비, 몽고디비 머신 시작
 도커 데스크탑에서,

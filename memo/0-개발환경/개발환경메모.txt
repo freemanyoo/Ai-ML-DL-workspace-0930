@@ -70,6 +70,13 @@ print("z:", z)
 
 conda create -n Pytorch python=3.10
 
+주의사항,
+작업 중, 라이브러리 충돌로, 실행이 잘 안되는 경우에는,
+파이토치 가상환경을 삭제 후에 다시, 설치하기.
+예시)
+conda env remove -n [가상환경 이름]
+conda env remove -n Pytorch
+
 가상환경 목록 조회. 
 conda env list  
 
@@ -108,6 +115,8 @@ Pytorch                C:\Users\it\anaconda3\envs\Pytorch
 
 pip3 install torch torchvision torchaudio
 conda install torch torchvision torchaudio
+
+
 
 
 2-3-2 , 

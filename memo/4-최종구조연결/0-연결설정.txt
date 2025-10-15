@@ -79,4 +79,20 @@ send
 
 
 2. 주가 예측 요청
+post 방식
+URL : http://localhost:8080/api/ai2/predict/rnn
+1) 토큰을 탑재
+예시 토큰
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtaWQiOiJsc3kxMDE0IiwiaWF0IjoxNzYwNDkxNTc3LCJleHAiOjE3NjA1Nzc5Nzd9.JZ64urPyrgwzNOGW6eqNnzapviHaP4kFnau7BdD75pE
+Authorization 탭 -> Auth Type : Bearer Token -> 오른쪽에 토큰값 붙여넣기
+
+2) 전달하는 형식
+Body 탭 -> raw 탭 -> Text -> JSON 변경
+내용에.
+json 복사
+{
+"model":"RNN",
+"data":[[83300,83200,85000,84200],[84600,83400,84900,83900],[84900,84700,86200,86000],[89300,88700,90300,89750]],
+"period":"5d"
+}
 

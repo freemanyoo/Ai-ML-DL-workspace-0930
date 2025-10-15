@@ -1,0 +1,17 @@
+YoLo , roboflow 에서, 퍼블릭 데이터 아쿠아리움 받기. 
+
+1 사이트 접속
+https://public.roboflow.com/
+
+2 찾기 
+Aquarium Dataset
+
+3 
+raw 1024 클릭 
+
+4 
+YOLOv8 모드로 
+show download code 사용. 
+
+5
+https://public.roboflow.com/ds/7CQzxIlrek?key=RF2cwhAWqJ

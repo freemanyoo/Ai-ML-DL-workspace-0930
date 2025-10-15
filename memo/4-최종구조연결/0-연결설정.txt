@@ -96,3 +96,31 @@ json 복사
 "period":"5d"
 }
 
+-----------------------------------------
+리액트 버전에서,
+1) 주가 정보 데이터 요청 구조
+로그인 후 -> 홈의 헤더 화면 Ai Test -> 사이드 메뉴 2번 , 삼성 주가 예측
+
+삼성 주가 예측에서, -> 5d 기간 선택 후, 데이터 가져오기 클릭 할 때 동작 구조,
+
+순서
+1)fetchStockData 함수 호출
+2) ->  dispatch(fetchStockDataRequest(selectedPeriod)); 함수 호출
+3) fetchStockDataRequest (aiSlice 파일로 이동)
+4) -> aiSaga 파일로 연결
+5) ->  yield takeLatest(fetchStockDataRequest.type, fetchStockDataSaga);
+6) -> fetchStockDataSaga 함수 호출
+fetchStockDataSaga 함수의 내용
+-> // ✅ 주가 데이터 가져오기 요청
+function* fetchStockDataSaga(action) {
+    try {
+        const response = yield call(
+            axiosInstance.get,
+            `/ai2/stock-data?period=${action.payload}`, // ✅ Base URL 적용됨
+        );
+        ....
+
+포스트맨에서 호출 했던 주소 처럼
+http://localhost:8080/api/ai2/stock-data?period=5d
+
+

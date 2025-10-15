@@ -7,6 +7,13 @@ https://github.com/lsy3709/React-Spring-Con-Work-boot-Backend.git
 3 자료3
 리액트 프론트 엔드 깃 주소
 https://github.com/lsy3709/React-Spring-Con-Work-boot-Frontend-.git
+3-2 자료4
+플라스크 서버 깃 주소
+https://github.com/lsy3709/AI-ML-Rest-Server-Sample-Flask-
+3-3 자료5
+샘플 모델 위치.
+망치, 니퍼
+https://www.band.us/band/98498013/attachment/folder/1495148
 
 4 모델 탑재한, 레스트 (플라스크서버)
 현재 프로젝트 폴더 -> 3-Resnet -> 플라스크 서버 샘플 작업.txt
@@ -54,5 +61,22 @@ yarn install
 2) 리액트에서
 로그인 후 -> AiTest -> 공구 툴 화면 -> 이미지 업로드 후 확인시, 정상 출력 .
 
+-------------------------------------------------------------
 
+삼성 주가 모델 이용, 레스트 버전
+1. 주가 정보 요청
+포스트맨에서, -> 스프링으로 요청시 주의사항,
+get 방식
+URL : http://localhost:8080/api/ai2/stock-data?period=5d
+1) 토큰을 탑재
+예시 토큰
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtaWQiOiJsc3kxMDE0IiwiaWF0IjoxNzYwNDkxNTc3LCJleHAiOjE3NjA1Nzc5Nzd9.JZ64urPyrgwzNOGW6eqNnzapviHaP4kFnau7BdD75pE
+Authorization 탭 -> Auth Type : Bearer Token -> 오른쪽에 토큰값 붙여넣기
+
+2) 전달하는 형식
+Params 탭 -> 키: period -> 값 : 5d
+send
+
+
+2. 주가 예측 요청
 

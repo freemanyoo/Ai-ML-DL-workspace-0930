@@ -14,4 +14,7 @@ YOLOv8 모드로
 show download code 사용. 
 
 5
-https://public.roboflow.com/ds/7CQzxIlrek?key=RF2cwhAWqJ
+링크를 다운로드 받기
+https://public.roboflow.com/object-detection/aquarium/2
+
+

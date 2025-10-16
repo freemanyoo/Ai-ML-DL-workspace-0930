@@ -1,0 +1,63 @@
+#AI_머신러닝_딥러닝_개발
+오픈 포즈 모델 (라이브러리 소개)
+
+공식 문서
+
+https://github.com/CMU-Perceptual-Computing-Lab/openpose?tab=readme-ov-file#installation
+
+1.
+1)
+설치,
+공식 문서 대로 해도 되고,
+
+일단 다른 블로그 참고해서, 몇가지 수정한 내용으로 안내하기.
+
+공식문서에서도 다운로드 가능.
+https://github.com/CMU-Perceptual-Computing-Lab/openpose/releases
+
+밴드에서 받기
+openpose-1.7.0-binaries-win64-gpu-python3.7-flir-3d_recommended.zip
+
+2)
+설치 폴더에, output 폴더 만들기.
+
+3)
+웨이트 값 모델을 임의로 다운로드 받기.
+https://github.com/CMU-Perceptual-Computing-Lab/openpose
+접속해서,
+openpose-master.zip 받기.
+
+4)
+압축을 풀고, getModels.bat 실행을 하면, 필요한
+가중치 파일을 받을수 있음. (시간이 많이 걸림)
+그래서, 제가 작업 해놓은 웨이트 파일을 미리 제공.
+
+5)
+pose.zip 압축 파일을
+openpose 폴더 안에 ->모델 폴더 안에-> pose 폴더 대신 교체하기.
+
+
+2.
+사용법
+일단, 기본 요구 조건은  gpu 그래픽 이 있어야 가능함.
+cpu 환경에서 확인만,
+
+오픈포즈 설치한 폴더에서 -> 탐색기 -> cmd 명령어 입력,
+cmd 창에서,
+아래 명령어를 입력하기.
+
+예시)
+경로에서,
+D:\openpose-1.7.0-binaries-win64-gpu-python3.7-flir-3d_recommended\openpose
+cmd
+
+
+이미지,
+bin\OpenPoseDemo.exe --image_dir examples/media --write_json output/ --write_images output_images/
+
+
+동영상
+bin\OpenPoseDemo.exe --video examples/media/video.avi --write_video output/predicted_output.avi --write_json output/json/ --write_images output/images/ --display 0 --render_pose 1
+
+
+

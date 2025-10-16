@@ -12,7 +12,8 @@ https://github.com/lsy3709/React-Spring-Con-Work-boot-Frontend-.git
 https://github.com/lsy3709/AI-ML-Rest-Server-Sample-Flask-
 3-3 자료5
 샘플 모델 위치.
-망치, 니퍼
+망치, 니퍼,
+나머지 모든 모델 샘플도 있음.
 https://www.band.us/band/98498013/attachment/folder/1495148
 
 4 모델 탑재한, 레스트 (플라스크서버)
@@ -95,7 +96,60 @@ json 복사
 "data":[[83300,83200,85000,84200],[84600,83400,84900,83900],[84900,84700,86200,86000],[89300,88700,90300,89750]],
 "period":"5d"
 }
+=========99-152번 줄까지======================================================
+3  새로운 동물상, 폐가전, 공구, yolov8, 모델 확인.
+3-1  동물상
+포스트맨에서, -> 스프링으로 요청시 주의사항,
+post 방식
+URL : http://localhost:8080/api/ai/predict/1
+1) 토큰을 탑재
+예시 토큰
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtaWQiOiJsc3kxMDE0IiwiaWF0IjoxNzYwNDkxNTc3LCJleHAiOjE3NjA1Nzc5Nzd9.JZ64urPyrgwzNOGW6eqNnzapviHaP4kFnau7BdD75pE
+Authorization 탭 -> Auth Type : Bearer Token -> 오른쪽에 토큰값 붙여넣기
 
+2) 전달하는 형식
+Body 탭 -> form-data 탭 ->  키: image -> 값 : 파일 형식, 이미지 선택.
+send
+
+3-2  폐가전
+포스트맨에서, -> 스프링으로 요청시 주의사항,
+post 방식
+URL : http://localhost:8080/api/ai/predict/2
+1) 토큰을 탑재
+예시 토큰
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtaWQiOiJsc3kxMDE0IiwiaWF0IjoxNzYwNDkxNTc3LCJleHAiOjE3NjA1Nzc5Nzd9.JZ64urPyrgwzNOGW6eqNnzapviHaP4kFnau7BdD75pE
+Authorization 탭 -> Auth Type : Bearer Token -> 오른쪽에 토큰값 붙여넣기
+
+2) 전달하는 형식
+Body 탭 -> form-data 탭 ->  키: image -> 값 : 파일 형식, 이미지 선택.
+send
+
+3-3  공구
+포스트맨에서, -> 스프링으로 요청시 주의사항,
+post 방식
+URL : http://localhost:8080/api/ai/predict/3
+1) 토큰을 탑재
+예시 토큰
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtaWQiOiJsc3kxMDE0IiwiaWF0IjoxNzYwNDkxNTc3LCJleHAiOjE3NjA1Nzc5Nzd9.JZ64urPyrgwzNOGW6eqNnzapviHaP4kFnau7BdD75pE
+Authorization 탭 -> Auth Type : Bearer Token -> 오른쪽에 토큰값 붙여넣기
+
+2) 전달하는 형식
+Body 탭 -> form-data 탭 ->  키: image -> 값 : 파일 형식, 이미지 선택.
+send
+
+3-4  yolov8
+포스트맨에서, -> 스프링으로 요청시 주의사항,
+post 방식
+URL : http://localhost:8080/api/ai/predict/4
+1) 토큰을 탑재
+예시 토큰
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtaWQiOiJsc3kxMDE0IiwiaWF0IjoxNzYwNDkxNTc3LCJleHAiOjE3NjA1Nzc5Nzd9.JZ64urPyrgwzNOGW6eqNnzapviHaP4kFnau7BdD75pE
+Authorization 탭 -> Auth Type : Bearer Token -> 오른쪽에 토큰값 붙여넣기
+
+2) 전달하는 형식
+Body 탭 -> form-data 탭 ->  키: image -> 값 : 파일 형식, 이미지 선택.
+send
+===============================================================
 -----------------------------------------
 리액트 버전에서,
 1) 주가 정보 데이터 요청 구조

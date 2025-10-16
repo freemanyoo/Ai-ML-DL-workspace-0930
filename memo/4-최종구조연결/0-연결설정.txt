@@ -178,3 +178,86 @@ function* fetchStockDataSaga(action) {
 http://localhost:8080/api/ai2/stock-data?period=5d
 
 
+---------------------------------------------------------------
+스프링에서의 진행 순서 개요
+이미지 분류
+1. 동물상
+1) 포스트맨에서 호출 : http://localhost:8080/api/ai/predict/1, 메서드: POST
+Body 탭 -> form-data 탭 ->  키: image -> 값 : 파일 형식, 이미지 선택. send
+2) 컨트롤러에 요청
+   @PostMapping("/predict/{teamNo}")
+public AiPredictionResponseDTO uploadImage(
+  @PathVariable int teamNo,
+  @RequestParam(value = "image", required = false) MultipartFile image){
+  AiPredictionResponseDTO responseDTO = aiUploadService.sendImageToDjangoServer(
+  image.getBytes(), image.getOriginalFilename(), teamNo);
+
+3) 서비스에 요청 ,
+aiUploadService.sendImageToDjangoServer(
+  image.getBytes(), image.getOriginalFilename(), teamNo) {
+   sendInitialRequest(imageBytes, filename, teamNo);
+  }
+  ;
+
+4) 서비스에 -> 플라스크 서버로 요청,
+sendInitialRequest 함수 실행
+
+private AiPredictionResponseDTO sendInitialRequest(byte[] fileBytes, String filename,
+int teamNo) throws IOException {
+        String flaskUrl;
+
+        // 팀 번호에 따라 URL 분기
+        switch (teamNo) {
+            case 1:
+                flaskUrl = "http://localhost:5000/predict/team1";
+                break;
+            case 2:
+                flaskUrl = "http://localhost:5000/predict/team2";
+                break;
+            case 3:
+                flaskUrl = "http://localhost:5000/predict/team3";
+                break;
+            case 4:
+                // YOLO 예측 요청 경로는 /predict/yolo (가정)
+                flaskUrl = "http://localhost:5000/predict/yolo";
+
+5) 플라스크 서버에, 요청 받은 주소,
+http://localhost:5000/predict/team1
+
+@app.route("/predict/<model_type>", methods=["POST"])
+def predict(model_type):
+
+        if model_type == 'yolo':
+
+        elif model_type in MODEL_CONFIGS:
+        try:
+            model, class_labels = load_classification_model(model_type)
+            image_bytes = file.read()
+
+6) 각 모델의 라벨링 분류 확인.
+# --- 이미지 분류 모델 설정 (요청 시 로드) ---
+MODEL_CONFIGS = {
+    "team1": {"model_path": "./resnet50_best_team1_animal.pth", "num_classes": 5,
+              "class_labels": ["고양이", "공룡", "강아지", "꼬북이", "티벳여우"]},
+    "team2": {"model_path": "./resnet50_best_team2_recycle.pth", "num_classes": 13,
+              "class_labels": ["영업용_냉장고", "컴퓨터_cpu", "드럼_세탁기", "냉장고",
+              "컴퓨터_그래픽카드", "메인보드", "전자레인지", "컴퓨터_파워", "컴퓨터_램",
+                               "스탠드_에어컨", "TV", "벽걸이_에어컨", "통돌이_세탁기"]},
+    "team3": {"model_path": "./resnet50_best_team3_tools_accuracy_90.pth", "num_classes": 10,
+              "class_labels": ["공구 톱", "공업용가위", "그라인더", "니퍼",
+              "드라이버", "망치", "스패너", "전동드릴", "줄자", "캘리퍼스"]},
+}
+
+7)
+모델이 예측한 결과를 응답, json
+{
+  "confidence": "58.48%",
+    "class_index": 0,
+    "predicted_class": "고양이",
+}
+
+8) 최초 호출자에게 전달,
+포스트맨, 리액트, 플러터 에게 답을 함.
+그러면, 각각의 끝단에서, 전달받은 데이터를 가지고,
+화면을 구성을함.
+
